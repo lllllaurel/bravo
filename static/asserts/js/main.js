@@ -29,7 +29,15 @@ $(document).ready(function(e){
         let phone = $("#register-phone").val()
         $.get('/register/appid', data={appid:appid,phone:phone,uname:uname}, function(e){
             if(e=='300'){
-                alert("数据库异常")
+                $("register-result h5").text("Appid已存在!");
+            }else if(e=='500'){
+                $("register-result h5").text("数据库异常!");
+            }else{
+                $("#register-result h5").text("注册成功!");
+                $("#register-result").find('h6').eq(0).text("Appid: "+e['appid'])
+                $("#register-result").find('h6').eq(1).text("Phone: "+e['phone'])
+                $("#register-result").find('h6').eq(2).text("Username: "+e['uname'])
+                $("#register-result").find('h6').eq(3).text("Password: "+e['password'])
             }
         })
     })

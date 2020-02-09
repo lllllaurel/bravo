@@ -8,11 +8,15 @@
   <meta name="keywords" content=""
 	 />
   <script>
-	 addEventListener("load", function () { setTimeout(hideURLbar, 0); }, false); function hideURLbar() { window.scrollTo(0, 1); }
+	 addEventListener("load", function () { setTimeout(hideURLbar, 0); }, false); function hideURLbar() { window.scrollTo(0, 1); };
   </script>
   <!-- Meta tags -->
   <!--stylesheets-->
   <link href="/static/asserts/css/style.css" rel='stylesheet' type='text/css' media="all">
+  <link rel="stylesheet" type="text/css"  href="/static/asserts/css/bootstrap.min.css">
+  <!-- JS -->
+  <script type="text/javascript" src="/static/asserts/js/jquery.min.js"></script> 
+  <script type="text/javascript" src="/static/asserts/js/bootstrap.min.js"></script> 
   <!--//style sheet end here-->
   <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700" rel="stylesheet">
 </head>
@@ -20,10 +24,10 @@
   <div class="mid-class">
 	 <div class="art-right-w3ls">
 		<h2>Login Bravo</h2>
-		<form action="#" method="post">
+		<form action="/login" method="post">
 		   <div class="main">
 			  <div class="form-left-to-w3l">
-				 <input type="text" name="name" placeholder="Username" required="">
+				 <input type="text" name="appid" placeholder="Appid" required="">
 			  </div>
 			  <div class="form-left-to-w3l ">
 				 <input type="password" name="password" placeholder="Password" required="">
@@ -31,17 +35,52 @@
 			  </div>
 		   </div>
 		   <div class="left-side-forget">
-			  <input type="checkbox" class="checked">
+			  <input type="checkbox" class="checked" name="remember">
 			  <span class="remenber-me">Remember me </span>
 		   </div>
 		   <div class="right-side-forget">
-			  <a href="#" class="for">Forgot password...?</a>
+			  <!-- <a href="#" class="for">Forgot password...?</a> -->
+			  <a href="#" type="button" class="for" data-toggle="modal" data-target="#login-forgot">
+				Forgot password
+			  </a>
 		   </div>
 		   <div class="clear"></div>
 		   <div class="btnn">
-			  <button type="submit">登陆</button>
+			  <button type="submit" class="btn btn-primary">登陆</button>
 		   </div>
 		</form>
+		<div class="modal fade" id="login-forgot" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+			  <div class="modal-content">
+				<div class="modal-header">
+				  <h5 class="modal-title" id="exampleModalLabel">忘记密码</h5>
+				  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				  </button>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="old-password" class="col-form-label">Appid:</label>
+						<input type="text" class="form-control" id="login-appid">
+					</div>
+					<div class="form-group">
+						<label for="old-password" class="col-form-label">原始密码:</label>
+						<input type="text" class="form-control" id="login-old-password">
+					</div>
+					<div class="form-group">
+						<label for="new-password" class="col-form-label">设置新密码:</label>
+						<input type="text" class="form-control" id="login-new-password">
+					</div>
+					<p id="login-forget-reminder"></p>
+				</div>
+				<div class="modal-footer">
+				  <button type="button" class="btn btn-secondary" data-dismiss="modal" id="login-pwd-close">Close</button>
+				  <button type="button" class="btn btn-primary" id="login-pwd-btn">Save changes</button>
+				  <button type="button" class="btn btn-secondary" data-dismiss="modal" id="login-pwd-back" style="display: none;" onclick="window.location.href='/login'">返回</button>
+				</div>
+			  </div>
+			</div>
+		  </div>
 		<!-- <div class="w3layouts_more-buttn">
 		   <h3>Don't Have an account..?
 			  <a href="#content1">Sign Up Here
@@ -55,10 +94,10 @@
 			  <div class="letter-w3ls">
 				 <form action="#" method="post">
 					<div class="form-left-to-w3l">
-					   <input type="text" name="name" placeholder="Username" required="">
+					   <input type="text" name="appid" placeholder="Appid" required="">
 					</div>
 					<div class="form-left-to-w3l">
-					   <input type="text" name="name" placeholder="Phone" required="">
+					   <input type="text" name="phone" placeholder="Phone" required="">
 					</div>
 					<div class="form-left-to-w3l">
 					   <input type="email" name="email" placeholder="Email" required="">
@@ -91,5 +130,29 @@
   <footer class="bottem-wthree-footer">
 	 <p>Copyright &copy; 2020.JujiaoData All rights reserved.<a target="_blank" href="http://sc.chinaz.com/moban/"></a></p>
   </footer>
+  <script>
+	  $(document).ready(function(e){
+		$("#login-pwd-btn").click(function(e){
+			let appid = $("#login-appid").val();
+			let oldPassword = $("#login-old-password").val();
+			let newPassword = $("#login-new-password").val();
+			if (appid==""||oldPassword==""||newPassword==""){
+				$("#login-forget-reminder").text("不能为空！")
+				return
+			}
+			$.getJSON('/login/changepassword', {old:oldPassword, new:newPassword, appid:appid}, function(e){
+				if (e['result']=="success"){
+					$(".modal-body").html("<h5>变更成功，新密码为:"+e["password"]);
+					$("#login-pwd-btn").hide()
+				}else{
+					$(".modal-body").html("<h5>变更失败:"+e["result"]);
+					$("#login-pwd-btn").hide()
+					$("#login-pwd-close").hide()
+					$("#login-pwd-back").show()
+				}
+			})
+		})
+	  })
+  </script>
 </body>
 </html>

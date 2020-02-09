@@ -15,3 +15,20 @@ def reformat_keyword(keyword):
         return None 
     keyword_split = keyword.split(':')
     return keyword_split[0]+'="%s"'%keyword_split[1]
+
+#随机生成密码
+def gen_password(bits):
+    import random 
+    r = []
+    for i in range(bits):
+        if i%2==0:
+            r.append(random.choice('abcdefghijklmnopqrstuvwxyz'))
+        else:
+            r.append(random.choice('1234567890'))
+    return ''.join(r)
+
+#判断登陆状态
+def is_logged():
+    from V.uu_admin import Uuadmin
+    db = Uuadmin()
+    return db.find_account_by_session()
