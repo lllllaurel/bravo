@@ -1,0 +1,31 @@
+{% extends 'basic.html' %}
+{% block body %}
+<div class="jumbotron">
+    <h1 class="display-4">注册新应用</h1>
+    <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+    <hr class="my-4">
+    <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+    <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+</div>
+
+<div class="input-group">
+    <div class="input-group-prepend">
+      <span class="input-group-text">Appid and Phone</span>
+    </div>
+    <input type="text" aria-label="user name" class="form-control" id="register-uname">
+    <input type="text" aria-label="appid" class="form-control" id="register-appid">
+    <input type="text" aria-label="phone" class="form-control" id="register-phone">
+    <button class="btn btn-outline-secondary" type="button" id="register-newapp">注册</button>
+</div>
+  
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">注册成功</h5>
+      <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+      <!-- <a href="#" class="card-link">Card link</a>
+      <a href="#" class="card-link">Another link</a> -->
+    </div>
+</div>
+
+{% endblock %}
