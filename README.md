@@ -41,3 +41,4 @@
 1. js\css 文件在basic.html中引用
 2. static/asserts/js/main.js 为项目的主要js文件，可在此基础上修改，也可新增等，该文件已在basic.html中引用
 3. static/asserts/css 下可添加css文件，在basic.html中引用即可生效
+4. static/asserts/bak 文件下的admin.sql已插入测试数据，可直接备份到数据库里
