@@ -9,9 +9,6 @@ class Uuadmin():
         self.session = DbMaker('admin').build()
 
     def register(self, uname, appid, phone):
-        # code = self.create_db(appid)
-        # if code is '300':
-        #     return code
         return self.register_uuadmin(uname, appid, phone)        
 
     def register_uuadmin(self, uname, appid, phone):
