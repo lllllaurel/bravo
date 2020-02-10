@@ -16,10 +16,8 @@ def navi_login():
     
     db = Uuadmin()
     if db.find_account_by_session():
-        app.logger.info("session")
         return redirect('/')
     if db.find_account(appid, password):
-        app.logger.info("ying")
         session.permanent = True
         if checked == 'on':
             app.permanent_session_lifetime = datetime.timedelta(days=7)
@@ -29,7 +27,6 @@ def navi_login():
         session['password'] = password
         return redirect('/')
     else:
-        app.logger.info("none")
         return render_template('login.html', incorrect = True)
 
 @app.route('/login/changepassword')
@@ -64,7 +61,7 @@ def navi_data():
     if not Handler.is_logged():
         return render_template('login.html')
 
-    appid = 'automata' #接收参数 appid
+    appid = session.get('appid')
     tablename = request.args.get('table')
     limit = request.args.get('limit')
     limit = [0,10] if limit is None else limit.split('-')
@@ -72,9 +69,11 @@ def navi_data():
 
     data = ShowData()
     comments, tables = data.list_tables(appid)
+    if len(tables) is 0 or len(comments) is 0:
+        del data
+        return render_template('database.html', tables=[], comments=[], tablelen=0, thiscomment='无数据', thisname='none', columns=[], details=[], height=0, wide=0)
     tablename=tables[0] if (tablename is None) else tablename
     tablecomment = Handler.find_comm_by_tb(tables, comments, tablename)
-
     columns = data.list_columns('admin', tablename)
     details = data.data_detail(tablename, limit, Handler.reformat_keyword(keyword))
     details.reverse()
@@ -84,7 +83,7 @@ def navi_data():
 
 @app.route('/overview')
 def overview():
-    appid = 'automata'
+    appid = session.get('appid')
     tb = '`'+appid+'.bu_overview`'
     sevenDaysAgo = (datetime.datetime.now() - datetime.timedelta(days = 7))
     ds = sevenDaysAgo.strftime("%Y%m%d")
