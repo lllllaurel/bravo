@@ -41,6 +41,9 @@ class Uuadmin():
 
     def find_account(self, appid, pwd):
         user = self.session.query(Uu_admin).filter(and_(Uu_admin.password == pwd, Uu_admin.appid == appid)).first()
+        if user is not None:
+            from flask import session 
+            session['super_user'] = user.super_user
         return False if user is None else True
 
     def find_account_by_session(self):
