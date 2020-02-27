@@ -1,137 +1,88 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
-  <title>Home</title>
-  <!-- Meta tags -->
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta name="keywords" content=""
-	 />
-  <script>
-	 addEventListener("load", function () { setTimeout(hideURLbar, 0); }, false); function hideURLbar() { window.scrollTo(0, 1); };
-  </script>
-  <!-- Meta tags -->
-  <!--stylesheets-->
-  <link href="/static/asserts/css/style.css" rel='stylesheet' type='text/css' media="all">
-  <link rel="stylesheet" type="text/css"  href="/static/asserts/css/bootstrap.min.css">
-  <!-- JS -->
-  <script type="text/javascript" src="/static/asserts/js/jquery.min.js"></script> 
-  <script type="text/javascript" src="/static/asserts/js/bootstrap.min.js"></script> 
-  <!--//style sheet end here-->
-  <!-- <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700" rel="stylesheet"> -->
+<title>Bravo!</title>
+
+<!-- Meta tags -->
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="" />
+<script>
+ addEventListener("load", function () { setTimeout(hideURLbar, 0); }, false); function hideURLbar() { window.scrollTo(0, 1); };
+</script>
+
+<!--stylesheets-->
+<link href="/static/asserts/css/loginstyle.css" rel='stylesheet' type='text/css'>
+<link href="/static/asserts/css/font-awesome.min.css" rel='stylesheet'>
+
+<!-- JS -->
+<script type="text/javascript" src="/static/asserts/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/asserts/js/main.js"></script>
+
 </head>
+
 <body>
-  <div class="mid-class">
-	 <div class="art-right-w3ls">
-		<h2>Login Bravo</h2>
-		<form action="/login" method="post">
-		   <div class="main">
-			  <div class="form-left-to-w3l">
-				 <input type="text" name="appid" placeholder="Appid" required="">
-			  </div>
-			  <div class="form-left-to-w3l ">
-				 <input type="password" name="password" placeholder="Password" required="">
-				 <div class="clear"></div>
-			  </div>
-		   </div>
-		   <div class="left-side-forget">
-			  <input type="checkbox" class="checked" name="remember">
-			  <span class="remenber-me">Remember me </span>
-		   </div>
-		   <div class="right-side-forget">
-			  <!-- <a href="#" class="for">Forgot password...?</a> -->
-			  <a href="#" type="button" class="for" data-toggle="modal" data-target="#login-forgot">
-				Forgot password
-			  </a>
-		   </div>
-		   <div class="clear"></div>
-		   <div class="btnn">
-			  <button type="submit" class="btn btn-primary">登陆</button>
-		   </div>
-		</form>
-		<div class="modal fade" id="login-forgot" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog" role="document">
-			  <div class="modal-content">
-				<div class="modal-header">
-				  <h5 class="modal-title" id="exampleModalLabel">忘记密码</h5>
-				  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				  </button>
+  	<div class="materialContainer">
+		<div class="box">
+			<form action="/login" method="post">
+				<div class="title">登录</div>
+				<div class="input">
+					<label id="appidlabel" for="appid">用户名</label>
+					<input type="text" name="appid" id="appid" required="">
+					<span class="spin"></span>
 				</div>
-				<div class="modal-body">
-					<div class="form-group">
-						<label for="old-password" class="col-form-label">Appid:</label>
-						<input type="text" class="form-control" id="login-appid">
-					</div>
-					<div class="form-group">
-						<label for="old-password" class="col-form-label">原始密码:</label>
-						<input type="text" class="form-control" id="login-old-password">
-					</div>
-					<div class="form-group">
-						<label for="new-password" class="col-form-label">设置新密码:</label>
-						<input type="text" class="form-control" id="login-new-password">
-					</div>
-					<p id="login-forget-reminder"></p>
+				<div class="input" style="margin-bottom: 10px">
+					<label for="pass">密码</label>
+					<input type="password" name="password" id="pass">
+					<span class="spin"></span>
 				</div>
-				<div class="modal-footer">
-				  <button type="button" class="btn btn-secondary" data-dismiss="modal" id="login-pwd-close">Close</button>
-				  <button type="button" class="btn btn-primary" id="login-pwd-btn">Save changes</button>
-				  <button type="button" class="btn btn-secondary" data-dismiss="modal" id="login-pwd-back" style="display: none;" onclick="window.location.href='/login'">返回</button>
+				<div class="row">
+					<input type="checkbox" class="checked" name="remember">
+					<span class="remember-me">记住我</span>
 				</div>
-			  </div>
-			</div>
-		  </div>
-		<!-- <div class="w3layouts_more-buttn">
-		   <h3>Don't Have an account..?
-			  <a href="#content1">Sign Up Here
-			  </a>
-		   </h3>
-		</div> -->
-		<!-- popup-->
-		<div id="content1" class="popup-effect">
-		   <div class="popup">
-			  <!--login form-->
-			  <div class="letter-w3ls">
-				 <form action="#" method="post">
-					<div class="form-left-to-w3l">
-					   <input type="text" name="appid" placeholder="Appid" required="">
-					</div>
-					<div class="form-left-to-w3l">
-					   <input type="text" name="phone" placeholder="Phone" required="">
-					</div>
-					<div class="form-left-to-w3l">
-					   <input type="email" name="email" placeholder="Email" required="">
-					</div>
-					<div class="form-left-to-w3l">
-					   <input type="password" name="password" placeholder="Password" required="">
-					</div>
-					<div class="form-left-to-w3l margin-zero">
-					   <input type="password" name="password" placeholder="Confirm Password" required="">
-					</div>
-					<div class="btnn">
-					   <button type="submit">Sign Up</button>
-					   <br>
-					</div>
-				 </form>
-				 <div class="clear"></div>
-			  </div>
-			  <!--//login form-->
-			  <a class="close" href="#">&times;</a>
-		   </div>
+				<div class="button login">
+					<button>
+						<span>登录</span>
+						<i class="fa fa-check"></i>
+					</button>
+				</div>
+				<a href="#" class="pass-forgot" onclick = "document.getElementById('forgot').style.display='block'">忘记密码？</a>
+			</form>
 		</div>
-		<!-- //popup -->
-	 </div>
-	 <div class="art-left-w3ls">
-		<h1 class="header-w3ls">
-			Make life intelligent and bravo!
-		</h1>
-	 </div>
-  </div>
-  <footer class="bottem-wthree-footer">
-	 <p>Copyright &copy; 2020.JujiaoData All rights reserved.<a target="_blank" href="http://sc.chinaz.com/moban/"></a></p>
-  </footer>
-  <script>
+
+		<div class="overbox" id="forgot" style="display: none">
+			<div class="title">忘记密码</div>
+			<a href="#" class="pass-forgot" onclick = "document.getElementById('forgot').style.display='none'"><i class="fa fa-2x fa-close" style="color: white"></i></a>
+			<div class="input">
+				<label for="login-appid">appid</label>
+				<input type="text" name="appid" id="login-appid">
+				<span class="spin"></span>
+			</div>
+			<div class="input">
+				<label for="login-old-password">原始密码</label>
+				<input type="password" name="oldpass" id="login-old-password">
+				<span class="spin"></span>
+			</div>
+			<div class="input">
+				<label for="login-new-password">新密码</label>
+				<input type="password" name="newpass" id="login-new-password">
+				<span class="spin"></span>
+			</div>
+			<div class="button remember">
+				<button>
+					<span>确定</span>
+					<i class="fa fa-check"></i>
+				</button>
+			</div>
+		</div>
+
+	</div>
+  	<footer class="bottem-wthree-footer">
+	 	<p>Copyright &copy; 2020.JujiaoData All rights reserved.<a target="_blank" href="http://sc.chinaz.com/moban/"></a></p>
+  	</footer>
+  	<script>
 	  $(document).ready(function(e){
+	  	$("#appidlabel").trigger("click");
 		$("#login-pwd-btn").click(function(e){
 			let appid = $("#login-appid").val();
 			let oldPassword = $("#login-old-password").val();
@@ -153,6 +104,6 @@
 			})
 		})
 	  })
-  </script>
+  	</script>
 </body>
 </html>

@@ -26,6 +26,8 @@
 
 >pip instal sqlalchemy
 
+>pip install flask-sqlalchemy
+
 数据库 admin
 - uu_admin
 - uu_tables

@@ -4,9 +4,9 @@ from sqlalchemy.orm import sessionmaker
 
 class DbMaker():
 
-    def __init__(self, db_name):
+    def __init__(self, db_name='admin'):
         #在此登录的是root, 冒号后面为密码，按需修改，MySQL默认端口是3306。并填上创建的数据库名如youcaihua
-        URI = 'mysql://root:1234@127.0.0.1:3306/%s?charset=utf8'%db_name
+        URI = 'mysql://root:12345678@127.0.0.1:3306/%s?charset=utf8'%db_name
         # app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
         #查询时会显示原始SQL语句
         engine = create_engine(URI) #绑定数据库
