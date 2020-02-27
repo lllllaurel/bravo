@@ -7,7 +7,7 @@ import datetime, os
 app = Flask(__name__)
 app.config['SECRET_KEY']=os.urandom(24)
 
-#登陆
+# login
 @app.route('/login', methods=['GET', 'POST'])
 def navi_login():
     appid = request.form.get('appid')
@@ -39,14 +39,14 @@ def change_password():
     del admin 
     return jsonify(result)
 
-#数据总览
+# data preview
 @app.route('/')
 def navi_global():
     if not Handler.is_logged():
         return render_template('login.html')
     return render_template('homepage.html')
 
-#登出
+# log out
 @app.route('/logout')
 def logout():
     if session.get('appid') is not None:
@@ -55,7 +55,7 @@ def logout():
         session.pop('password')
     return render_template('login.html')
 
-#数据详情
+# data detail
 @app.route('/data')
 def navi_data():
     if not Handler.is_logged():
@@ -71,7 +71,7 @@ def navi_data():
     comments, tables = data.list_tables(appid)
     if len(tables) is 0 or len(comments) is 0:
         del data
-        return render_template('database.html', tables=[], comments=[], tablelen=0, thiscomment='无数据', thisname='none', columns=[], details=[], height=0, wide=0)
+        return render_template('database.html', tables=[], comments=[], tablelen=0, thiscomment='no data', thisname='none', columns=[], details=[], height=0, wide=0)
     tablename=tables[0] if (tablename is None) else tablename
     tablecomment = Handler.find_comm_by_tb(tables, comments, tablename)
     columns = data.list_columns('admin', tablename)
@@ -95,7 +95,7 @@ def overview():
     r['visits'] = visits
     return jsonify(r)
 
-#注册新应用
+# register new application
 @app.route('/register')
 def register():
     if not Handler.is_logged():
@@ -111,7 +111,7 @@ def register_appid():
     del ua
     return jsonify(result)
 
-#测试
+# test
 @app.route('/test')
 def test():
     from V.handler import gen_password

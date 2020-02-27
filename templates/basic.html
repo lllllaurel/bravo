@@ -1,67 +1,104 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Home</title>
-<meta name="description" content="">
-<meta name="author" content="">
+<title>应用纵览</title>
+<link rel="shortcut icon" href="#"/>
 
-<!-- Bootstrap -->
-<link rel="stylesheet" type="text/css"  href="/static/asserts/css/bootstrap.min.css">
+<!-- Meta tags -->
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="" />
+<script>
+ addEventListener("load", function () { setTimeout(hideURLbar, 0); }, false); function hideURLbar() { window.scrollTo(0, 1); };
+</script>
 
-<!--js -->
-<script type="text/javascript" src="/static/asserts/js/jquery.min.js"></script> 
-<script type="text/javascript" src="/static/asserts/js/bootstrap.bundle.min.js"></script> 
-<script type="text/javascript" src="/static/asserts/js/bootstrap.min.js"></script> 
-<script type="text/javascript" src="/static/asserts/js/echarts.common.min.js"></script>
+<!--stylesheets-->
+<link href="/static/asserts/css/ionicons/css/ionicons.min.css" rel="stylesheet" type="text/css">
+<link href="/static/asserts/css/flag-icon.min.css" rel="stylesheet" type="text/css">
+<link href="/static/asserts/css/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="/static/asserts/css/fontawesome-all.min.css" rel='stylesheet' type='text/css'>
+<link href="/static/asserts/css/font-awesome.min.css" rel='stylesheet'>
+<link href="/static/asserts/css/style.css" rel='stylesheet' type='text/css'>
+
+<!-- JS -->
+<script type="text/javascript" src="/static/asserts/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/asserts/js/popper.js"></script>
+<script type="text/javascript" src="/static/asserts/js/tooltip.js"></script>
+<script type="text/javascript" src="/static/asserts/js/jquery.nicescroll.min.js"></script>
+<script type="text/javascript" src="/static/asserts/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/static/asserts/js/scroll-up-bar.min.js"></script>
+<script type="text/javascript" src="/static/asserts/js/sa-functions.js"></script>
+<script type="text/javascript" src="/static/asserts/js/scripts.js"></script>
+<script type="text/javascript" src="/static/asserts/js/chart.min.js"></script>
 <script type="text/javascript" src="/static/asserts/js/main.js"></script> 
+
 </head>
 <body >
-<!-- Header -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Bravo!</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link" href="/">应用概况</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/data">数据详情</a>
-      </li>
-      {% if session['super_user'] %}
-      <li class="nav-item">
-        <a class="nav-link" href="/register">应用注册</a>
-      </li>
-      {% endif %}
-      <li class="nav-item">
-        <a class="nav-link" href="/logout">注销</a>
-      </li>
-      <!-- <li class="nav-item dropdown" style="display: none;">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
+  <div class="main-wrapper">
+    <div class="navbar-bg"></div>
+    <nav class="navbar navbar-expand-lg main-navbar">
+      <form class="form-inline mr-auto">
+        <ul class="navbar-nav mr-3">
+          <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="ion ion-navicon-round"></i></a></li>
+          <li><a href="#" data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i class="ion ion-search"></i></a></li>
+        </ul>
+        <div class="search-element">
+          <input class="form-control" type="search" placeholder="查找" aria-label="Search">
+          <button class="btn" type="submit"><i class="ion ion-search"></i></button>
         </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-      </li> -->
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
+      </form>
+      <ul class="navbar-nav navbar-right"> 
+        <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg">
+          <i class="ion ion-android-person d-lg-none"></i>
+          <div class="d-sm-none d-lg-inline-block">你好, flask</div></a>
+          <div class="dropdown-menu dropdown-menu-right">
+            <a href="/logout" class="dropdown-item has-icon">
+              <i class="ion ion-log-out"></i> 退出
+            </a>
+          </div>
+        </li>
+      </ul>
+    </nav>
+    <div class="main-sidebar">
+      <aside id="sidebar-wrapper">
+        <div class="sidebar-brand">
+          <a href="/">Bravo!</a>
+        </div>
+        <div class="sidebar-user">
+          <div class="sidebar-user-details">
+            <div class="user-name">flask</div>
+            <div class="user-role">
+              超级管理员
+            </div>
+          </div>
+        </div>
+        <ul class="sidebar-menu">
+          <li id='home' class="active">
+            <a href="/"><i class="ion ion-speedometer"></i><span>应用纵览</span></a>
+          </li>
+          <li id='data'>
+            <a href="/data"><i class="ion ion-clipboard"></i><span>数据详情</span></a>
+          </li>
+          {% if session['supper_user'] %}
+          <li id='register'>
+            <a href="/register"><i class="ion ion-flag"></i><span>应用注册</span></a>
+          </li>
+          {% endif %}
+        </ul>
+      </aside>
+    </div>
+    <div class="main-content">
+      <section class="section">
+        {% block body %}{% endblock %}
+      </section>
+    </div>
   </div>
-</nav>
-{% block body %}{% endblock %}
+  <footer class="main-footer">
+    <div class="footer-left">
+      Copyright &copy; 2020 <div class="bullet"></div>jujiaodata
+    </div>
+    <div class="footer-right"></div>
+  </footer>
+  {% block script %}{% endblock %}
 </body>
 </html>
