@@ -1,13 +1,15 @@
 from flask import Flask
-from urllib import parse
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+from config.conf import DatabaseConfig
 
+app = Flask(__name__)
 class DbMaker():
 
-    def __init__(self, db_name='admin'):
+    def __init__(self, dbname = 'admin'):
         #在此登录的是root, 冒号后面为密码，按需修改，MySQL默认端口是3306。并填上创建的数据库名如youcaihua
-        URI = 'mysql://%s:%s@127.0.0.1:3306/%s?charset=utf8'%('bravo', parse.unquote_plus('Jujiao2020%'),db_name)
+        app.config.from_object(DatabaseConfig)
+        URI = 'mysql://%s:%s@127.0.0.1:3306/%s?charset=utf8'%(app.config['USER'], app.config['PASSWORD'], dbname)
         # app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
         #查询时会显示原始SQL语句
         engine = create_engine(URI) #绑定数据库
