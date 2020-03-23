@@ -46,15 +46,15 @@
 						<i class="fa fa-check"></i>
 					</button>
 				</div>
-				<a href="#" class="pass-forgot" onclick = "document.getElementById('forgot').style.display='block'">忘记密码？</a>
+				<a href="#" class="pass-forgot" onclick = "document.getElementById('forgot').style.display='block'">修改密码？</a>
 			</form>
 		</div>
 
 		<div class="overbox" id="forgot" style="display: none">
-			<div class="title">忘记密码</div>
+			<div class="title">修改密码</div>
 			<a href="#" class="pass-forgot" onclick = "document.getElementById('forgot').style.display='none'"><i class="fa fa-2x fa-close" style="color: white"></i></a>
 			<div class="input">
-				<label for="login-appid">appid</label>
+				<label for="login-appid">Appid</label>
 				<input type="text" name="appid" id="login-appid">
 				<span class="spin"></span>
 			</div>
@@ -69,10 +69,11 @@
 				<span class="spin"></span>
 			</div>
 			<div class="button remember">
-				<button>
+				<button id="login-pwd-btn">
 					<span>确定</span>
 					<i class="fa fa-check"></i>
 				</button>
+				<div id="change-result" role="alert"></div>
 			</div>
 		</div>
 
@@ -93,13 +94,11 @@
 			}
 			$.getJSON('/login/changepassword', {old:oldPassword, new:newPassword, appid:appid}, function(e){
 				if (e['result']=="success"){
-					$(".modal-body").html("<h5>变更成功，新密码为:"+e["password"]);
+					$("#change-result").html("变更成功，新密码为:"+e["password"]);
 					$("#login-pwd-btn").hide()
 				}else{
-					$(".modal-body").html("<h5>变更失败:"+e["result"]);
-					$("#login-pwd-btn").hide()
-					$("#login-pwd-close").hide()
-					$("#login-pwd-back").show()
+					$("#change-result").html("变更失败:"+e["result"]);
+					$("#login-pwd-btn").hide();
 				}
 			})
 		})

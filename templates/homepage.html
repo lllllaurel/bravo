@@ -14,7 +14,7 @@
           <h4>用户总数</h4>
         </div>
         <div class="card-body">
-          10
+          {{usernum}}
         </div>
       </div>
     </div>
@@ -29,7 +29,7 @@
           <h4>访问总量</h4>
         </div>
         <div class="card-body">
-          42
+          {{visistors_total}}
         </div>
       </div>
     </div>
@@ -44,7 +44,7 @@
           <h4>数据总量</h4>
         </div>
         <div class="card-body">
-          1,201
+          {{data_total}}
         </div>
       </div>
     </div>
@@ -59,7 +59,7 @@
             <h4>服务器容量</h4>
           </div>
           <div class="card-body">
-            47
+            -
           </div>
         </div>
       </div>
@@ -82,19 +82,19 @@
           <canvas id="myChart" height="158"></canvas>
           <div class="statistic-details mt-sm-4">
             <div class="statistic-details-item">
-              <div class="detail-value">1</div>
+              <div class="detail-value">{{visitors}}</div>
               <div class="detail-name">今日访问量</div>
             </div>
             <div class="statistic-details-item">
-              <div class="detail-value">12</div>
+              <div class="detail-value">{{visitors7}}</div>
               <div class="detail-name">今周访问量</div>
             </div>
             <div class="statistic-details-item">
-              <div class="detail-value">50</div>
+              <div class="detail-value">{{visitors30}}</div>
               <div class="detail-name">今月访问量</div>
             </div>
             <div class="statistic-details-item">
-              <div class="detail-value">109</div>
+              <div class="detail-value">{{visitors365}}</div>
               <div class="detail-name">今年访问量</div>
             </div>
           </div>
@@ -107,13 +107,20 @@
 {% block script %}
 <script>
   var ctx = document.getElementById("myChart").getContext('2d');
+  $.ajaxSetup({  
+    async : false
+  });
+  $.getJSON('/overview',{},function(data){
+    users = data['users'];
+    visits = data['visits'];
+  });
   var myChart = new Chart(ctx, {
     type: 'line',
     data: {
       labels: ["星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"],
       datasets: [{
         label: '访问量',
-        data: [43, 31, 29, 15, 10, 50, 23],
+        data: visits,
         borderWidth: 2,
         backgroundColor: 'rgb(87,75,144)',
         borderColor: 'rgb(87,75,144)',

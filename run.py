@@ -44,7 +44,13 @@ def change_password():
 def navi_global():
     if not Handler.is_logged():
         return render_template('login.html')
-    return render_template('homepage.html')
+    appid = session.get('appid')
+    tb = '`'+appid+'.bu_overview`'
+    ds = datetime.datetime.now().strftime("%Y%m%d")
+    data = ShowData()
+    visitors, visitors7, visitors30, visitors365, users, visistors_total, data_total = data.list_info(tb, ds)
+    del data
+    return render_template('homepage.html', visitors=visitors, visitors7=visitors7, visitors30=visitors30, visitors365=visitors365, usernum=users, visistors_total=visistors_total, data_total=data_total)
 
 # log out
 @app.route('/logout')

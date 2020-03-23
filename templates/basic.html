@@ -68,7 +68,11 @@
           <div class="sidebar-user-details">
             <div class="user-name">flask</div>
             <div class="user-role">
+              {% if session['super_user'] %}
               超级管理员
+              {% else %}
+              管理员
+              {% endif %}
             </div>
           </div>
         </div>
@@ -79,7 +83,7 @@
           <li id='data'>
             <a href="/data"><i class="ion ion-clipboard"></i><span>数据详情</span></a>
           </li>
-          {% if session['supper_user'] %}
+          {% if session['super_user'] %}
           <li id='register'>
             <a href="/register"><i class="ion ion-flag"></i><span>应用注册</span></a>
           </li>

@@ -14,13 +14,24 @@ class Uuadmin():
     def register_uuadmin(self, uname, appid, phone):
         uuid = str(time.time())
         password = gen_password(10)
+        # whether this appid already exists
         sql_select = 'select * from uu_admin where appid="%s";'%appid
         sql_insert = 'insert into uu_admin(uuid, uname, phone, appid, password) values("%s", "%s", "%s", "%s", "%s")'%(uuid, uname, phone, appid, password)
+        create_table_sql = ''' create table `%s.bu_overview`(
+            id int(4) primary key,
+            appid varchar(100) not null,
+            user_num int(4) not null default 0,
+            visit_num int(4) not null default 0,
+            ds varchar(50) not null,
+            create_at datetime default current_timestamp
+        )'''%appid 
         try:
             check = self.session.execute(sql_select)
+            # create database and essential tables in admin
             if check.fetchone() is None:
                 self.create_db(appid)
                 self.session.execute(sql_insert)
+                self.session.execute(create_table_sql)
                 self.session.commit()
             else:
                 return '300'
